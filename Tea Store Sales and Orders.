@@ -1,0 +1,38 @@
+CREATE TABLE tea_sales (id INTEGER PRIMARY KEY, name TEXT, in_stock INTEGER, retail_price INTEGER, sold INTEGER, pending_orders INTEGER);
+INSERT INTO tea_sales VALUES (1, "Black", 43, 5, 22, 7);
+INSERT INTO tea_sales VALUES (2, "Green", 32, 4, 25, 6);
+INSERT INTO tea_sales VALUES (3, "Herbal", 35, 6, 15, 2);
+INSERT INTO tea_sales VALUES (4, "Sleepy", 24, 5, 40, 20);
+INSERT INTO tea_sales VALUES (5, "Lemongrass", 30, 4, 33, 8);
+INSERT INTO tea_sales VALUES (6, "Chamomille", 22, 5, 40, 12);
+INSERT INTO tea_sales VALUES (7, "Ginger", 27, 6, 39, 4);
+INSERT INTO tea_sales VALUES (8, "Mint", 20, 5, 15, 5);
+INSERT INTO tea_sales VALUES (9, "Peach", 28, 6, 38, 9);
+INSERT INTO tea_sales VALUES (10, "Hibiscus", 25, 6, 22, 3);
+INSERT INTO tea_sales VALUES (11, "Lemon_Ginger", 18, 6, 20, 1);
+INSERT INTO tea_sales VALUES (12, "White", 30, 7, 17, 2);
+INSERT INTO tea_sales VALUES (13, "Earl_Gray", 23, 4, 29, 8);
+INSERT INTO tea_sales VALUES (14, "Pepermint", 34, 5, 30, 5);
+INSERT INTO tea_sales VALUES (15, "Oolong", 26, 7, 21, 4);
+
+SELECT * FROM tea_sales;
+
+SELECT * FROM tea_sales
+WHERE retail_price = 4
+ORDER BY sold;
+
+SELECT * FROM tea_sales
+WHERE retail_price = 5
+ORDER BY sold;
+
+SELECT * FROM tea_sales
+WHERE retail_price = 6
+ORDER BY sold;
+
+SELECT * FROM tea_sales
+WHERE retail_price = 7
+ORDER BY sold;
+
+SELECT id, name, TOTAL(sold*retail_price) FROM tea_sales GROUP BY id ORDER BY TOTAL(sold*retail_price);
+
+SELECT id, SUM(pending_orders) FROM tea_sales;
