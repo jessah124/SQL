@@ -1,0 +1,86 @@
+CREATE TABLE characters (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+actor_name TEXT,
+character TEXT);
+
+INSERT INTO characters (actor_name, character) VALUES ("Robert Downey Jr", "Tony Stark");
+INSERT INTO characters (actor_name, character) VALUES ("Benedict Wong", "Wong");
+INSERT INTO characters (actor_name, character) VALUES ("Chris Evans", "Steve Rogers");
+INSERT INTO characters (actor_name, character) VALUES ("Jeremy Renner", "Clint Barton");
+INSERT INTO characters (actor_name, character) VALUES ("Chris Hemsworth", "Thor");
+INSERT INTO characters (actor_name, character) VALUES ("Mark Ruffalo", "Bruce Banner");
+INSERT INTO characters (actor_name, character) VALUES ("Elizabeth Olsen", "Wanda Maximoff");
+INSERT INTO characters (actor_name, character) VALUES ("Paul Rudd", "Scott Lang");
+INSERT INTO characters (actor_name, character) VALUES ("Tilda Swinton", "Ancient One");
+INSERT INTO characters (actor_name, character) VALUES ("Michael Pena", "Luis");
+INSERT INTO characters (actor_name, character) VALUES ("Tom Holland", "Peter Parker");
+INSERT INTO characters (actor_name, character) VALUES ("Scarlett Johansson", "Natasha Romanova");
+INSERT INTO characters (actor_name, character) VALUES ("Sebastian Stan", "Bucky Barnes");
+INSERT INTO characters (actor_name, character) VALUES ("Zoe Saldana", "Gamora");
+INSERT INTO characters (actor_name, character) VALUES ("Benedict Cumberbatch", "Stephen Strange");
+INSERT INTO characters (actor_name, character) VALUES ("Chadwick Boseman", "T'Challa");
+INSERT INTO characters (actor_name, character) VALUES ("Jacob Batalon", "Ned Leeds");
+INSERT INTO characters (actor_name, character) VALUES ("Lupita Nyong'o", "Nakia");
+INSERT INTO characters (actor_name, character) VALUES ("Chris Pratt", "Star-Lord");
+INSERT INTO characters (actor_name, character) VALUES ("Tom Hiddleston", "Loki");
+INSERT INTO characters (actor_name, character) VALUES ("Vin Diesel", "Groot");
+INSERT INTO characters (actor_name, character) VALUES ("Bradley Cooper", "Rocket");
+INSERT INTO characters (actor_name, character) VALUES ("Gwyneth Paltrow", "Pepper Potts");
+
+SELECT * FROM characters;
+
+CREATE TABLE movie
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+marvel_movie TEXT);
+
+INSERT INTO movie (name, marvel_movie) VALUES ("Robert Downey Jr", "Iron Man");
+INSERT INTO movie (name, marvel_movie) VALUES ("Benedict Wong", "Doctor Strange");
+INSERT INTO movie (name, marvel_movie) VALUES ("Chris Evans", "Captain America");
+INSERT INTO movie (name, marvel_movie) VALUES ("Jeremy Renner", "Avengers");
+INSERT INTO movie (name, marvel_movie) VALUES ("Chris Hemsworth", "Thor");
+INSERT INTO movie (name, marvel_movie) VALUES ("Mark Ruffalo", "Avengers");
+INSERT INTO movie (name, marvel_movie) VALUES ("Elizabeth Olsen", "Avengers");
+INSERT INTO movie (name, marvel_movie) VALUES ("Paul Rudd", "Antman");
+INSERT INTO movie (name, marvel_movie) VALUES ("Tilda Swinton", "Doctor Strange");
+INSERT INTO movie (name, marvel_movie) VALUES ("Michael Pena", "Antman");
+INSERT INTO movie (name, marvel_movie) VALUES ("Tom Holland", "Spiderman");
+INSERT INTO movie (name, marvel_movie) VALUES ("Scarlett Johansson", "Iron Man");
+INSERT INTO movie (name, marvel_movie) VALUES ("Sebastian Stan", "Captain America");
+INSERT INTO movie (name, marvel_movie) VALUES ("Zoe Saldana", "Guardians of the Galaxy");
+INSERT INTO movie (name, marvel_movie) VALUES ("Benedict Cumberbatch", "Doctor Strange");
+INSERT INTO movie (name, marvel_movie) VALUES ("Chadwick Boseman", "Black Panther");
+INSERT INTO movie (name, marvel_movie) VALUES ("Jacob Batalon", "Spiderman");
+INSERT INTO movie (name, marvel_movie) VALUES ("Lupita Nyong'o", "Black Panther");
+INSERT INTO movie (name, marvel_movie) VALUES ("Chris Pratt", "Guardians of the Galaxy");
+INSERT INTO movie (name, marvel_movie) VALUES ("Tom Hiddleston", "Thor");
+INSERT INTO movie (name, marvel_movie) VALUES ("Vin Diesel", "Guardians of the Galaxy");
+INSERT INTO movie (name, marvel_movie) VALUES ("Bradley Cooper", "Guardians of the Galaxy");
+INSERT INTO movie (name, marvel_movie) VALUES ("Gwyneth Paltrow", "Iron Man");
+
+SELECT characters.actor_name, characters.character, movie.marvel_movie
+FROM characters
+JOIN movie
+ON characters.actor_name = movie.name
+ORDER BY marvel_movie;
+
+CREATE table friends
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+Hero INTEGER,
+best_friend INTEGER);
+
+INSERT INTO friends (Hero, best_friend) VALUES (19, 14);
+INSERT INTO friends (Hero, best_friend) VALUES (15, 2);
+INSERT INTO friends (Hero, best_friend) VALUES (8, 10);
+INSERT INTO friends (Hero, best_friend) VALUES (16, 18);
+INSERT INTO friends (Hero, best_friend) VALUES (12, 4);
+INSERT INTO friends (Hero, best_friend) VALUES (3, 13);
+INSERT INTO friends (Hero, best_friend) VALUES (11, 17);
+INSERT INTO friends (Hero, best_friend) VALUES (22, 21);
+INSERT INTO friends (Hero, best_friend) VALUES (2, 23);
+
+SELECT a.character AS Hero, b.character AS Best_Friend FROM friends
+JOIN characters a
+ON friends.Hero = a.id
+JOIN characters b
+ON friends.best_friend = b.id
