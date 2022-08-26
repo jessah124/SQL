@@ -64,3 +64,16 @@ SELECT artist_name, avg(tempo)
 FROM BIT_DB.Spotifydata
 GROUP BY artist_name
 ORDER BY avg(tempo) desc
+
+/* Label the ten most popular artist as top star */
+WITH avg_popularity AS(
+SELECT s.artist_name, AVG(s.popularity) AS average_popularity
+FROM Spotifydata s
+GROUP BY s.artist_name
+)
+SELECT artist_name, 
+       average_popularity,
+       'Top Star' as tag
+FROM avg_popularity
+WHERE average_popularity>=90
+ORDER BY average_popularity desc
