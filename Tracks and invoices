@@ -1,0 +1,83 @@
+/*1. Select all customers from the USA */
+SELECT customerid, FirstName, LastName
+FROM customers
+WHERE country = 'USA';
+
+/*1. Select all customers not from the USA */
+Select customerid, firstname, lastname, country
+FROM customers
+WHERE country NOT IN('USA');
+
+/*3. Get invoices from customers from the USA */
+SELECT cust.Firstname, cust.LastName, inv.invoiceid, inv.invoicedate
+FROM customers cust
+LEFT JOIN invoices inv
+ON cust.customerid = inv.customerid
+WHERE cust.country = 'USA';
+
+/*4. Get the total spent on each invoice */
+SELECT invoiceid, SUM(unitprice*quantity) AS TotalSales
+FROM invoice_items
+GROUP BY Invoiceid;
+
+/*5. Get the invoice id with largest amount spent */
+SELECT invoiceid, SUM(unitprice*quantity) AS TotalSales
+FROM invoice_items
+GROUP BY Invoiceid
+ORDER BY TotalSales desc LIMIT 10;
+
+/*6. Get all track names from one genre */
+SELECT tracks.name, tracks.composer, genres.name
+FROM tracks
+LEFT JOIN genres
+ON genres.genreid=tracks.genreid
+WHERE genres.genreId = ('1');
+
+/*7. Get all composer names in alphabetical order */
+SELECT composer FROM tracks
+WHERE composer !=('NULL')
+ORDER BY composer;
+
+/*8. Get all the songs by the Foo Fighters */
+SELECT name FROM tracks 
+WHERE composer = ('Foo Fighters');
+
+/*9. Get that have been sold more than onece */
+SELECT trackid, sum(quantity) AS NumberSold
+FROM invoice_items
+GROUP BY trackid
+ORDER BY NumberSold desc LIMIT 500;
+
+/*10. Get all playlists with track name and duration */
+SELECT p.playlistid, t.name, t.milliseconds
+FROM playlist_track p
+LEFT JOIN tracks t 
+ON p.trackid = t.trackid;
+
+/*11. Show invoices associated with each sales agent */
+SELECT emp.LastName, emp.Firstname, inv.InvoiceId
+FROM chinook.Employees emp 
+JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+
+/*12. Show invoice totals, customer name, country, and sales agent */
+SELECT emp.LastName, emp.Firstname, cust.FirstName, cust.LastName, cust.Country, inv.total
+FROM chinook.employees emp 
+JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+
+/*13. Which sales agents made the most in sales in 2011? */
+SELECT emp.FirstName, emp.LastName,
+ROUND(SUM(Inv.Total), 2) as 'Total Sales' 
+FROM chinook.Employees emp
+
+JOIN chinook.Customers cust 
+ON cust.SupportRepId = emp.EmployeeId
+
+JOIN chinook.Invoices Inv 
+ON Inv.CustomerId = cust.CustomerId
+
+WHERE emp.Title = 'Sales Support Agent' 
+AND Inv.InvoiceDate LIKE '2011%' 
+GROUP BY emp.FirstName
+ORDER BY (round(sum(Inv.Total), 2))  DESC LIMIT 1;
